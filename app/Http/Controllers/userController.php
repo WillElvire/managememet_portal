@@ -60,4 +60,10 @@ class userController extends Controller
     {
         //
     }
+
+    public function sendEmail(Request $request){
+        return response()->json(  openssl_encrypt($request->email, 'AES-128-ECB', 'secret'));
+       
+       //Mail::to($email)->send(new );
+    }
 }

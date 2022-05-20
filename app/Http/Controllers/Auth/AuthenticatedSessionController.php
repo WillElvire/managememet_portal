@@ -30,7 +30,9 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(Request $request)
     {
-        $user = User::where('username', $request->username)->first();
+        $loginPayload = $request->all();
+
+        $user = User::firstWhere(['username'=>$request->Username]);
         if (!$user) {
             return response([
                 'message' => ['the username is incorrect or user does\'nt exist']
@@ -58,6 +60,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return response()->json([
+            'message' => 'You have been successfully logged out.'
+        ]);
     }
 }

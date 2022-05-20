@@ -27,4 +27,10 @@ class VerifyEmailController extends Controller
 
         return redirect()->intended(RouteServiceProvider::HOME.'?verified=1');
     }
+
+
+  
+
+
+    
 }

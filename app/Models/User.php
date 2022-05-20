@@ -22,6 +22,8 @@ class User extends Authenticatable
         'password',
         'username',
         'isVerified',
+        'group_id',
+        'role_id'
     ];
 
     /**
@@ -45,5 +47,13 @@ class User extends Authenticatable
 
     public function Batch(){
         return $this->belongsTo('App\Models\batch');
+    }
+
+    public function Role(){
+        return $this->hasOne('App\Models\role');
+    }
+    
+    public function Group(){
+        return $this->hasOne('App\Models\group');
     }
 }
