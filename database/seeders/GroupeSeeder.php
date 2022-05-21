@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-use App\Models\group; 
+use App\Models\group;
 use Illuminate\Database\Seeder;
 
 class GroupeSeeder extends Seeder
@@ -19,6 +19,9 @@ class GroupeSeeder extends Seeder
         ]);
         group::create([
             'name'=>'compliance',
+        ]);
+        group::create([
+            'name'=>'voting',
         ]);
     }
 }

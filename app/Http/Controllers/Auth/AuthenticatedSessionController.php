@@ -31,7 +31,6 @@ class AuthenticatedSessionController extends Controller
     public function store(Request $request)
     {
         $loginPayload = $request->all();
-
         $user = User::firstWhere(['username'=>$request->Username]);
         if (!$user) {
             return response([
