@@ -7,6 +7,7 @@ use App\Models\Pool;
 use Illuminate\Http\Request;
 use App\Models\Voteer;
 use Illuminate\Support\Facades\Session;
+use App\Models\Result;
 
 class PoolController extends Controller
 {
@@ -36,10 +37,15 @@ class PoolController extends Controller
                 $imageUrl = $path . $imgfullname;
                 $file->move($path, $imgfullname);
                 $images[] = $imgfullname;
-                Voteer::create([
+                $voteer = Voteer::create([
                     'name'=>$data['name'],
                     'department'=>$data['department'],
                     'image_url'=>'/outfit/'.$imgfullname,
+                ]);
+
+                Result::create([
+                    'voteer_id'=>$voteer->id,
+                    'result'=>0,
                 ]);
             }
         }
@@ -47,6 +53,10 @@ class PoolController extends Controller
        Session::flash('message', 'image has been successfully uploaded');
        return back();
 
+    }
 
+    public function result(){
+        $result = Result::with('Voteer')->orderBy('result','desc')->limit(6)->get();
+        return response()->json($result);
     }
 }

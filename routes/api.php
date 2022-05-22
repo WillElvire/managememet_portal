@@ -45,8 +45,8 @@ Route::post('/gift/update/{id}',[GiftController::class,'updateGift'])->name('upd
 
 
 //////////////////////////////// POOL /////////////////////////////////////////////////
-Route::get('/poll/voteers',[PoolController::class,'getVoteer'])->name('giftVoteer');
-Route::get('/pool/verify/{id}',[PoolController::class,'verify'])->name('giftVote');
-Route::get('/gift/get',[GiftController::class,'getGift'])->name('getGift');
-
+Route::get('/poll/voteers',[PoolController::class,'getVoteer'])->name('poolVoteer');
+Route::get('/pool/verify/{id}',[PoolController::class,'verify'])->name('poolVote');
+//Route::get('/gift/get',[GiftController::class,'getGift'])->name('getGift');
+Route::get('/pool/result',[PoolController::class,'result'])->name('giftResult');
 Route::post('/gift/interval',[GiftController::class,'getFromDate'])->name('giftInterval');

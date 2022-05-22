@@ -13,7 +13,7 @@ class GiftController extends Controller
     //
 
     public function store(Request $request){
-        
+
         $gift_type = type::where(['id'=>$request->giftType])->first();
         $url = "";
         if($gift_type!=null){
@@ -38,10 +38,10 @@ class GiftController extends Controller
             ]);
             return response()->json(['message'=>'Gift created successfully']);
         }
-        return responce()->json(['error'=>'Gift type not found'],404);
+        return response()->json(['error'=>'Gift type not found'],404);
 
-    
-        
+
+
     }
 
     public function getGift(){
@@ -75,8 +75,8 @@ class GiftController extends Controller
      }
 
      public function getFromDate(Request $request){
-         
-        
+
+
         $date =$request->date;
         //return response()->json($date);
         $gifts = gift::with('type','detail','user')->where(['created_at'=>$date])->get();
