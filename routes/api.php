@@ -50,3 +50,4 @@ Route::get('/pool/verify/{id}',[PoolController::class,'verify'])->name('poolVote
 //Route::get('/gift/get',[GiftController::class,'getGift'])->name('getGift');
 Route::get('/pool/result',[PoolController::class,'result'])->name('giftResult');
 Route::post('/gift/interval',[GiftController::class,'getFromDate'])->name('giftInterval');
+Route::post('poll/vote',[PoolController::class,'addPool'])->name('addPool');

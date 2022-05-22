@@ -59,4 +59,22 @@ class PoolController extends Controller
         $result = Result::with('Voteer')->orderBy('result','desc')->limit(6)->get();
         return response()->json($result);
     }
+
+    public function addPool(Request $request){
+
+        $result = Result::where(['voteer_id'=>$request->vote])->first();
+        $pool = Pool::where(['user_id'=>$request->user_id])->first();
+        if($pool==null){
+            Pool::create([
+                'user_id'=>$request->user_id,
+                'voteer_id'=>$request->vote
+            ]);
+            $result->update([
+                'result'=>$result->result + 1
+            ]);
+            return response()->json(['message'=>'you have successfully voted']);
+        }
+        return response()->json(['message'=>'you have already voted']);
+
+    }
 }
