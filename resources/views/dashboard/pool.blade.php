@@ -20,6 +20,48 @@
 
     <title>Document</title>
 </head>
+<style>
+    h1{
+        color:orangered;
+        font-weight: bold;
+        margin-top: 2%;
+    }
+    .card{
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+        border-radius : 20px;
+        height: auto;
+        margin-top: 2%;
+    }
+    .card input{
+        border-radius : 20px;
+        height: 7vh;
+        box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    }
+    .card button{
+        height: 8vh;
+        border-radius: 20px;
+        background: orangered;
+        border: none;
+        font-weight: bold;
+    }
+    .card h4{
+        text-align: center;
+    }
+    .card h4:before{
+        content:'---'
+    }
+    .card h4:after{
+        content:'---'
+    }
+    .alert-danger{
+        border-radius: 20px;
+        box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    }
+    .alert-success{
+        border-radius: 20px;
+    }
+</style>
+
 <body>
     <h1 class="text-center">GT VOTE </h1>
 
@@ -36,6 +78,11 @@
                         {{ session::get('message') }}
                     </div>
                 @endif
+                @if(Session::has('error'))
+                    <div class="alert alert-danger">
+                        {{ session::get('error') }}
+                    </div>
+                 @endif
                 <input class="form-control" name="name" placeholder="Name">
                 <input class="form-control mt-4" name="department" placeholder="Department">
                 <input type="file" id="files" name="files[]" multiple  class="form-control mt-4"   accept=".jpg,.png,.jpeg" >

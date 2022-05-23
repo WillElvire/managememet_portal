@@ -27,31 +27,36 @@ class PoolController extends Controller
 
         $data = $request->except('token','files');
         $images = array();
-        if($files = $request->file('files')){
-            foreach($files as $file){
+        if($request->name != null && $request->department != null) :
+            if($files = $request->file('files')){
+                foreach($files as $file){
 
-                $name = md5($file->getClientOriginalName());
-                $ext = strtolower($file->getClientOriginalExtension());
-                $imgfullname = $name . '.' . $ext;
-                $path = public_path().'/outfit/';
-                $imageUrl = $path . $imgfullname;
-                $file->move($path, $imgfullname);
-                $images[] = $imgfullname;
-                $voteer = Voteer::create([
-                    'name'=>$data['name'],
-                    'department'=>$data['department'],
-                    'image_url'=>'/outfit/'.$imgfullname,
-                ]);
+                    $name = md5($file->getClientOriginalName());
+                    $ext = strtolower($file->getClientOriginalExtension());
+                    $imgfullname = $name . '.' . $ext;
+                    $path = public_path().'/outfit/';
+                    $imageUrl = $path . $imgfullname;
+                    $file->move($path, $imgfullname);
+                    $images[] = $imgfullname;
+                    $voteer = Voteer::create([
+                        'name'=>$data['name'],
+                        'department'=>$data['department'],
+                        'image_url'=>'/outfit/'.$imgfullname,
+                    ]);
 
-                Result::create([
-                    'voteer_id'=>$voteer->id,
-                    'result'=>0,
-                ]);
+                    Result::create([
+                        'voteer_id'=>$voteer->id,
+                        'result'=>0,
+                    ]);
+                }
             }
-        }
 
-       Session::flash('message', 'image has been successfully uploaded');
-       return back();
+            Session::flash('message', 'image has been successfully uploaded');
+            return back();
+        else:
+            Session::flash('error', 'Plz fill all fields');
+            return back();
+        endif;
 
     }
 
